@@ -1,0 +1,14 @@
+.main {
+  min-height: 100vh;
+}
+
+.dpFlex {
+  display: flex;
+  height: 95vh;
+}
+
+.mainLayout {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}

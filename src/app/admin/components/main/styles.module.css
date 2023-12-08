@@ -1,0 +1,28 @@
+.main {
+  flex: 1;
+  display: flex;
+}
+
+.label {
+  margin-bottom: 8px;
+}
+
+.left,
+.right {
+  width: 50%;
+}
+
+.left {
+  padding: 20px 10px;
+}
+
+.text,
+.button {
+  text-transform: capitalize;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.button {
+  padding: 2px 4px;
+}
