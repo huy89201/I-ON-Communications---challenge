@@ -9,9 +9,10 @@ import { useState, DragEvent } from "react";
 import { useGloContext } from "../context/gloContext";
 
 export default function AdminPage() {
-  const [instances, setInstances] = useState<TInstance[]>([]);
   const [dragging, setDragging] = useState<string>("");
   const [currentInstance, setCurrentInstance] = useState<TInstance>();
+
+  const { past, setPast, present, setPresent } = useGloContext();
 
   // Handle drag
   const handleDrag = (evt: DragEvent<HTMLDivElement>, item: TSidebarItems) => {
@@ -27,10 +28,13 @@ export default function AdminPage() {
       type: item.type,
       props: {
         text: "",
-        message: item.type === "button" ? "" : "",
+        message: "",
       },
     };
-    setInstances([...instances, newInstance]);
+
+    setPresent([...present, newInstance]);
+
+    if (present.length > 0) setPast([...past, present.pop()!]);
   };
 
   // Click instances item
@@ -40,12 +44,12 @@ export default function AdminPage() {
 
   return (
     <main className={styles.main}>
-      <Header  instances={instances}/>
+      <Header instances={present} />
       <div className={styles.dpFlex}>
         <Sidebar handleDrag={handleDrag} />
         <div className={styles.mainLayout}>
           <Main
-            instances={instances}
+            instances={present}
             dragging={dragging}
             handleClickInstance={handleClickInstance}
             currentInstance={currentInstance}
@@ -53,8 +57,8 @@ export default function AdminPage() {
           <Bottom
             currentInstance={currentInstance}
             setCurrentInstance={setCurrentInstance}
-            instances={instances}
-            setInstances={setInstances}
+            instances={present}
+            setInstances={setPresent}
           />
         </div>
       </div>

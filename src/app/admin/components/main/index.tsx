@@ -1,6 +1,5 @@
-"use client";
-import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+import MouseTracking from "../mouseTracking/index";
 
 type Props = {
   instances: TInstance[];
@@ -15,30 +14,10 @@ export default function Main({
   handleClickInstance,
   currentInstance,
 }: Props) {
-  const [mousePos, setMousePos] = useState({
-    x: 0,
-    y: 0,
-  });
-
-  // Tracking mouse position
-  useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      setMousePos({ x: event.clientX, y: event.clientY });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
-
   return (
     <div className={styles.main}>
       <div className={styles.left}>
-        <div className={styles.label}>
-          Mouse: ({mousePos.x}, {mousePos.y})
-        </div>
+        <MouseTracking />
         <div className={styles.label}>Dragging: {dragging}</div>
         <div className={styles.label}>
           Instances: {instances.length === 0 ? "" : instances.length}
