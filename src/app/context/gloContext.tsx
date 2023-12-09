@@ -37,6 +37,7 @@ export default function GloContextProvider({ children }: gloContextProps) {
   const [future, setFuture] = useState<TInstance[]>([]);
 
   const undo = () => {
+    // Stop undo when instances is empty
     if (past.length === 0) return;
 
     const newPresent = present.slice(0, present.length - 1);
@@ -46,6 +47,7 @@ export default function GloContextProvider({ children }: gloContextProps) {
   };
 
   const redo = () => {
+    // Stop redo when instances is latest version
     if (future.length === 0) return;
 
     setPresent([...present, future.shift() as TInstance]);

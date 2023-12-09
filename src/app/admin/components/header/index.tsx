@@ -3,16 +3,12 @@ import styles from "./styles.module.css";
 import Link from "next/link";
 import { MouseEventHandler } from "react";
 
-type Props = {
-  instances: TInstance[];
-};
 
-export default function Header({ instances }: Props) {
-  const { setGloInstances, undo, redo } = useGloContext();
+export default function Header() {
+  const { present, undo, redo } = useGloContext();
 
   const handleSaveInstance = () => {
-    setGloInstances([...instances]);
-    localStorage.setItem("instances", JSON.stringify([...instances]));
+    localStorage.setItem("instances", JSON.stringify([...present]));
   };
 
   return (

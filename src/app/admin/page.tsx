@@ -12,7 +12,7 @@ export default function AdminPage() {
   const [dragging, setDragging] = useState<string>("");
   const [currentInstance, setCurrentInstance] = useState<TInstance>();
 
-  const { past, setPast, present, setPresent } = useGloContext();
+  const { past, setPast, present, setPresent, setFuture } = useGloContext();
 
   // Handle drag
   const handleDrag = (evt: DragEvent<HTMLDivElement>, item: TSidebarItems) => {
@@ -33,6 +33,7 @@ export default function AdminPage() {
     };
 
     setPresent([...present, newInstance]);
+    setFuture([]);
 
     if (present.length > 0) setPast([...past, present.pop()!]);
   };
@@ -44,7 +45,7 @@ export default function AdminPage() {
 
   return (
     <main className={styles.main}>
-      <Header instances={present} />
+      <Header />
       <div className={styles.dpFlex}>
         <Sidebar handleDrag={handleDrag} />
         <div className={styles.mainLayout}>
